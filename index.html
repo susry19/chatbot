@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Power BI Chatbot</title>
+
+    <!-- @n8n/chat için gerekli CSS dosyası -->
+    <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+
+    <script type="module">
+        import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+        // Chatbot'u başlat
+        createChat({
+            webhookUrl: 'https://susry.app.n8n.cloud/webhook/8372adc7-60db-41b7-8b38-96a16c91e93f/chat', // Webhook URL'ni buraya ekle
+            target: '#chat-container', // Chat penceresini nereye ekleyeceğiz?
+            mode: 'window', // "window" veya "fullscreen"
+            defaultLanguage: 'en', // Şu an sadece İngilizce destekleniyor
+            showWelcomeScreen: true, // Açıldığında hoş geldin mesajı gösterilsin mi?
+            initialMessages: [
+                'Merhaba! 👋', 
+                'Ben senin Power BI chatbotunum. Bana raporlarla ilgili sorularını sorabilirsin!'
+            ]
+        });
+    </script>
+
+    <style>
+        #chat-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            border: 1px solid #ccc;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+            display: none;
+            background: white;
+            border-radius: 10px;
+        }
+        #chat-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="chat-button">💬</button>
+
+    <div id="chat-container">
+        <button onclick="closeChat()" style="width: 100%; padding: 5px; background: red; color: white; border: none;">Kapat</button>
+    </div>
+
+    <script>
+        document.getElementById("chat-button").addEventListener("click", function() {
+            let chat = document.getElementById("chat-container");
+            chat.style.display = (chat.style.display === "none") ? "block" : "none";
+        });
+
+        function closeChat() {
+            document.getElementById("chat-container").style.display = "none";
+        }
+    </script>
+
+</body>
+</html>
